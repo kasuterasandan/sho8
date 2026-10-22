@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>司法試験 受験生の人生</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&display=swap">
+<style>
+:root{--bg:#eceff4;--surface:#fafbfd;--ink:#14213d;--sub:#56627a;--line:#c9d0de;--red:#b3261e;--bar:#14213d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1424;--surface:#161f35;--ink:#e8ecf5;--sub:#9aa6bf;--line:#2b3753;--red:#ff6b5e;--bar:#e8ecf5;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1424;--surface:#161f35;--ink:#e8ecf5;--sub:#9aa6bf;--line:#2b3753;--red:#ff6b5e;--bar:#e8ecf5;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;line-height:1.75}
+main{max-width:560px;margin:0 auto;padding:24px 18px 56px}
+h1{font-size:2.3rem;font-weight:800;line-height:1.25;margin:8px 0 12px}
+h1 small{display:block;font-size:1rem;font-weight:500;color:var(--sub)}
+p{margin:0 0 12px}
+.sub{color:var(--sub);font-size:.86rem}
+.btn{display:block;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--ink);padding:11px 14px;margin:0 0 9px;cursor:pointer;border-radius:4px}
+.btn:hover,.btn:focus-visible{border-left-color:var(--red);outline:2px solid var(--red);outline-offset:1px}
+.btn.main{background:var(--ink);color:var(--bg);text-align:center;font-weight:700}
+.btn small{display:block;color:var(--sub);font-size:.78rem;line-height:1.5;margin-top:2px}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px 12px;margin:0 0 16px}
+.st{font-size:.76rem;color:var(--sub)}
+.st b{display:block;font-size:1.02rem;color:var(--ink);line-height:1.3}
+.bar{height:5px;background:var(--line);margin-top:3px}
+.bar i{display:block;height:100%;background:var(--bar);transition:width .4s}
+.bar i.low{background:var(--red)}
+.card{background:var(--surface);border:1px solid var(--line);padding:16px;border-radius:4px;margin-bottom:14px}
+.card h2{font-size:1.2rem;margin:0 0 8px}
+.prog{font-size:.85rem;color:var(--sub);margin-bottom:8px}
+.res{border-left:3px solid var(--red);padding-left:12px;margin:8px 0 0}
+.stamp{display:inline-block;border:4px solid var(--red);color:var(--red);font-weight:800;font-size:2.2rem;padding:2px 18px;transform:rotate(-6deg);margin:6px 0 16px;letter-spacing:.08em}
+ul.log{padding-left:1.2em;font-size:.84rem;color:var(--sub)}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+var NM={dev:"偏差値",law:"法律力",b:"体力",m:"精神",f:"資金"};
+var PXC={k:"currentColor",w:"#ffffff",r:"#b3261e",y:"#f5c542",g:"#3c9d5d",b:"#3b6fd1",p:"#f2b8a2"};
+var SPR={
+person:["...kk...","..kppk..","..kppk..","...kk...","..bbbb..",".bbbbbb.",".b.bb.b.",".k....k."],
+book:["........",".rrrrrr.",".rwwwwr.",".rrrrrr.",".rwwwwr.",".rrrrrr.","........","........"],
+coin:["..yyyy..",".yykkyy.",".yyyyyy.",".yykkyy.",".yykkyy.",".yyyyyy.","..yyyy..","........"],
+heart:["........",".rr..rr.","rrrrrrrr","rrrrrrrr",".rrrrrr.","..rrrr..","...rr...","........"],
+body:["...gg...","...gg...","gggggggg","gggggggg","gggggggg","...gg...","...gg...","........"],
+star:["...yy...","...yy...","yyyyyyyy",".yyyyyy.","..yyyy..",".yy..yy.",".y....y.","........"],
+sad:["........",".kk..kk.",".kk..kk.","........","..kkkk..",".k....k.","........","........"],
+school:["...rr...","..rrrr..",".rrrrrr.","rrrrrrrr",".wwwwww.",".w.ww.w.",".w.ww.w.",".wwwwww."]};
+function SP(k){var g=SPR[k],o='';for(var y=0;y<8;y++)for(var x=0;x<8;x++){var c=g[y].charAt(x);if(c!='.')o+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="'+PXC[c]+'"/>'}return '<svg viewBox="0 0 8 8" width="64" height="64" shape-rendering="crispEdges" style="display:block;margin:0 0 10px;color:var(--ink)">'+o+'</svg>'}
+function PX(t){var k=/不合格|撤退|惜敗|失効|別の道|区切り|落ち込|別れ|失敗/.test(t)?'sad':/合格|番号/.test(t)?'star':/資金|お金|学費|奨学|仕送り|家賃|税金|生活費|スマホ|フリマ|懸賞|住まい|費用|万円/.test(t)?'coin':/体力|寝込|体調|看病|睡眠|運動|休/.test(t)?'body':/精神|心|励まさ|恋人|映画|旅行|SNS/.test(t)?'heart':/勉強|講座|答練|模試|予備試験|予備校|論文|短答|学習|塾|図書|ゼミ|試験/.test(t)?'book':/学校|大学|高校|中学|ロー|法科|就職|インターン|留学|進学/.test(t)?'school':'person';return SP(k)}
+var HC=["#2b1d14","#6b4423","#c9a24a","#1c1c1c","#8a8a8a","#b5532a"],SKC=["#f6d7bd","#e8b98e","#c98f62","#8d5a3b"],CC=["#3b6fd1","#3c9d5d","#e0e0e0","#7a5cc8","#d98c2b"];
+var PB=["..hhhh..",".hhhhhh.",".hssssh.",".sesses.",".ssssss.","..ssss..","..cccc..",".cccccc."];
+function PT(){var L=S.look,R=PB.slice(),C={h:L.h,s:L.s,c:S.job?"#1e2a44":L.c,e:"#14213d",g:"#14213d",t:"#b3261e"};if(S.dev>=62)R[3]=".gegseg.";if(S.m<30)R[5]="..eeee..";if(S.job)R[6]="..cctc..";var o='';for(var y=0;y<8;y++)for(var x=0;x<8;x++){var c=R[y].charAt(x);if(c!='.')o+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="'+C[c]+'"/>'}return '<svg viewBox="0 0 8 8" width="56" height="56" shape-rendering="crispEdges" style="display:block">'+o+'</svg>'}
+function PT(){var L=S.look,sh=S.job?"#1e2a44":L.c,dk="#14213d",g='';
+g+='<path d="M4 64 Q6 44 32 42 Q58 44 60 64 Z" fill="'+sh+'"/>';
+g+='<rect x="27" y="34" width="10" height="10" rx="3" fill="'+L.s+'"/>';
+if(S.job)g+='<path d="M26 42 L32 52 L38 42 Z" fill="#f5f5f5"/><polygon points="32,46 29.5,50 32,60 34.5,50" fill="#b3261e"/>';
+g+='<ellipse cx="32" cy="26" rx="13" ry="15" fill="'+L.s+'"/>';
+g+='<path d="M18.5 25 Q16 6 32 5.5 Q48 6 45.5 25 Q44 14 36 13 Q28 17 18.5 25 Z" fill="'+L.h+'"/>';
+g+='<circle cx="26.5" cy="27" r="2" fill="'+dk+'"/><circle cx="37.5" cy="27" r="2" fill="'+dk+'"/>';
+if(S.dev>=62)g+='<circle cx="26.5" cy="27" r="4.5" fill="none" stroke="'+dk+'" stroke-width="1.2"/><circle cx="37.5" cy="27" r="4.5" fill="none" stroke="'+dk+'" stroke-width="1.2"/><path d="M31 27 L33 27" stroke="'+dk+'" stroke-width="1.2"/>';
+g+=S.m<30?'<path d="M27 38.5 Q32 34.5 37 38.5" fill="none" stroke="'+dk+'" stroke-width="1.6" stroke-linecap="round"/>':'<path d="M27.5 35 Q32 39 36.5 35" fill="none" stroke="'+dk+'" stroke-width="1.6" stroke-linecap="round"/>';
+return '<svg viewBox="0 0 64 64" width="56" height="56" style="display:block">'+g+'</svg>'}
+function PT(){var L=S.look,it=S.items||[],sh=S.job?"#1e2a44":L.c,dk="#14213d",g='',gray="#c8c8c8";
+g+='<path d="M4 64 Q6 44 32 42 Q58 44 60 64 Z" fill="'+sh+'"/>';
+g+='<rect x="27" y="34" width="10" height="10" rx="3" fill="'+L.s+'"/>';
+if(it.indexOf("bag")>=0&&!S.job)g+='<path d="M12 42 Q18 46 22 52" fill="none" stroke="#3a3f55" stroke-width="2"/><rect x="5" y="46" width="13" height="13" rx="3" fill="#3a3f55"/>';
+if(S.job)g+='<path d="M9 52 L9 49 L15 49 L15 52" fill="none" stroke="#6b4423" stroke-width="1.6"/><rect x="4" y="52" width="16" height="10" rx="1.5" fill="#6b4423"/>';
+if(it.indexOf("book")>=0)g+='<rect x="44" y="50" width="12" height="9" rx="1" fill="#b3261e"/><rect x="46" y="52" width="8" height="1" fill="#f5f5f5"/><rect x="46" y="55" width="8" height="1" fill="#f5f5f5"/>';
+if(S.job)g+='<path d="M26 42 L32 52 L38 42 Z" fill="#f5f5f5"/><polygon points="32,46 29.5,50 32,60 34.5,50" fill="#b3261e"/>';
+g+='<ellipse cx="32" cy="26" rx="13" ry="15" fill="'+L.s+'"/>';
+g+='<path d="M18.5 25 Q16 6 32 5.5 Q48 6 45.5 25 Q44 14 36 13 Q28 17 18.5 25 Z" fill="'+L.h+'"/>';
+if(S.m<25)g+='<path d="M22 14 L20 6 L26 11 L28 4 L31 10 L35 3 L37 10 L43 5 L42 13 Z" fill="'+L.h+'"/>';
+if(S.a>=35)g+='<path d="M19 22 Q20 8 32 7.5 Q44 8 45 22 Q42 13 32 12.5 Q22 13 19 22 Z" fill="'+gray+'" opacity=".75"/>';
+if(S.a>=45)g+='<path d="M25.5 18 Q32 16.5 38.5 18" fill="none" stroke="'+dk+'" stroke-opacity=".35" stroke-width="1"/><path d="M22 31 L20.5 33" stroke="'+dk+'" stroke-opacity=".4" stroke-width="1"/><path d="M42 31 L43.5 33" stroke="'+dk+'" stroke-opacity=".4" stroke-width="1"/>';
+g+='<circle cx="26.5" cy="27" r="2" fill="'+dk+'"/><circle cx="37.5" cy="27" r="2" fill="'+dk+'"/>';
+if(S.b<30||S.m<30)g+='<ellipse cx="26.5" cy="31" rx="3" ry="1.2" fill="'+dk+'" opacity=".3"/><ellipse cx="37.5" cy="31" rx="3" ry="1.2" fill="'+dk+'" opacity=".3"/>';
+if(S.dev>=62)g+='<circle cx="26.5" cy="27" r="4.5" fill="none" stroke="'+dk+'" stroke-width="1.2"/><circle cx="37.5" cy="27" r="4.5" fill="none" stroke="'+dk+'" stroke-width="1.2"/><path d="M31 27 L33 27" stroke="'+dk+'" stroke-width="1.2"/>';
+g+=S.m<30?'<path d="M27 38.5 Q32 34.5 37 38.5" fill="none" stroke="'+dk+'" stroke-width="1.6" stroke-linecap="round"/>':'<path d="M27.5 35 Q32 39 36.5 35" fill="none" stroke="'+dk+'" stroke-width="1.6" stroke-linecap="round"/>';
+return '<svg viewBox="0 0 64 64" width="56" height="56" style="display:block">'+g+'</svg>'}
+function PT(){var L=S.look,it=S.items||[],a=S.a||0,st=a<7?0:a<13?1:a<18?2:a<30?3:a<50?4:5,dk="#14213d",gray="#c8c8c8",g='';
+var hs=[1.4,1.2,1.08,1,1,0.97][st],bw=[0.5,0.68,0.85,1,1,0.98][st],sh=S.job?"#1e2a44":L.c;
+g+='<path d="M'+(32-30*bw)+' 64 Q'+(32-27*bw)+' 47 32 46 Q'+(32+27*bw)+' 47 '+(32+30*bw)+' 64 Z" fill="'+sh+'"/>';
+g+='<rect x="27" y="36" width="10" height="10" rx="3" fill="'+L.s+'"/>';
+if(it.indexOf("bag")>=0&&!S.job){var bc=st<=2?"#b3261e":"#3a3f55";g+='<path d="M'+(32-30*bw+3)+' 52 Q'+(32-30*bw+8)+' 46 '+(32-30*bw+12)+' 54" fill="none" stroke="'+bc+'" stroke-width="2"/><rect x="'+(32-30*bw-2)+'" y="50" width="'+(13*bw+4)+'" height="13" rx="3" fill="'+bc+'"/>'}
+if(S.job&&st>=3)g+='<rect x="4" y="52" width="16" height="10" rx="1.5" fill="#6b4423"/><path d="M9 52 L9 49 L15 49 L15 52" fill="none" stroke="#6b4423" stroke-width="1.6"/>';
+if(it.indexOf("book")>=0&&st>=2)g+='<rect x="44" y="50" width="12" height="9" rx="1" fill="#b3261e"/><rect x="46" y="52" width="8" height="1" fill="#f5f5f5"/><rect x="46" y="55" width="8" height="1" fill="#f5f5f5"/>';
+if(S.job&&st>=3)g+='<path d="M26 42 L32 52 L38 42 Z" fill="#f5f5f5"/><polygon points="32,46 29.5,50 32,60 34.5,50" fill="#b3261e"/>';
+g+='<g transform="translate(32 26) scale('+hs+') translate(-32 -26)">';
+g+='<ellipse cx="32" cy="26" rx="13" ry="15" fill="'+L.s+'"/>';
+g+='<path d="M18.5 25 Q16 6 32 5.5 Q48 6 45.5 25 Q44 14 36 13 Q28 17 18.5 25 Z" fill="'+L.h+'"/>';
+if(S.m<25)g+='<path d="M22 14 L20 6 L26 11 L28 4 L31 10 L35 3 L37 10 L43 5 L42 13 Z" fill="'+L.h+'"/>';
+if(a>=35)g+='<path d="M19 22 Q20 8 32 7.5 Q44 8 45 22 Q42 13 32 12.5 Q22 13 19 22 Z" fill="'+gray+'" opacity="'+(a>=50?'.95':'.7')+'"/>';
+if(a>=45)g+='<path d="M25.5 18 Q32 16.5 38.5 18" fill="none" stroke="'+dk+'" stroke-opacity=".35" stroke-width="1"/><path d="M22 31 L20.5 33" stroke="'+dk+'" stroke-opacity=".4" stroke-width="1"/><path d="M42 31 L43.5 33" stroke="'+dk+'" stroke-opacity=".4" stroke-width="1"/>';
+var er=st==0?2.8:st==1?2.4:2;g+='<circle cx="26.5" cy="27" r="'+er+'" fill="'+dk+'"/><circle cx="37.5" cy="27" r="'+er+'" fill="'+dk+'"/>';
+if(S.b<30||S.m<30)g+='<ellipse cx="26.5" cy="31" rx="3" ry="1.2" fill="'+dk+'" opacity=".3"/><ellipse cx="37.5" cy="31" rx="3" ry="1.2" fill="'+dk+'" opacity=".3"/>';
+if(S.dev>=62&&st>=1)g+='<circle cx="26.5" cy="27" r="4.5" fill="none" stroke="'+dk+'" stroke-width="1.2"/><circle cx="37.5" cy="27" r="4.5" fill="none" stroke="'+dk+'" stroke-width="1.2"/><path d="M31 27 L33 27" stroke="'+dk+'" stroke-width="1.2"/>';
+g+=st==0?'<circle cx="32" cy="36" r="2" fill="'+dk+'"/>':S.m<30?'<path d="M27 38.5 Q32 34.5 37 38.5" fill="none" stroke="'+dk+'" stroke-width="1.6" stroke-linecap="round"/>':'<path d="M27.5 35 Q32 39 36.5 35" fill="none" stroke="'+dk+'" stroke-width="1.6" stroke-linecap="round"/>';
+g+='</g>';
+return '<svg viewBox="0 0 64 64" width="56" height="56" style="display:block">'+g+'</svg>'}
+function tb(name){if(!S.track)return 0;var n=/東京大学|京都大学|一橋大学/.test(name),p=/慶應|早稲田|中央|明治|同志社|立命館|日本大学|Fラン|小規模な地方私立/.test(name);if(S.track=="国公立向け")return n?3:p?-2:0;return n?-3:p?3:0}
+function trk(){scr("受験科目の選択","高校では、大学受験に向けた科目の組み合わせを決める。国立と私立では、必要な科目が違う。",[["国公立向け(数学・理科を含む5教科7科目)<small>国立大の共通テスト・2次試験に強い。私立文系の科目は一部しか使わず、学習負担が大きい。</small>",function(){S.track="国公立向け";ap({m:-2,dev:.5});uniPrep()}],["私立向け(英語・国語・地歴など3〜4科目に集中)<small>私立文系の入試に強い。国立の数学・理科が弱点になり、国立大の合格率が下がる。</small>",function(){S.track="私立向け";ap({m:2,dev:.5});uniPrep()}]])}
+function ronYear(){pickPrep(function(){year("大学受験の浪人",function(){ap({dev:1.5});univ()})})}
+function ronPick(dorm){S.ronin=(S.ronin||0)+1;S.h.push("浪人("+(dorm?"寮":"自宅")+")");if(dorm){S.f-=96;ap({m:3,b:-2})}else{ap({m:-3})}ronYear()}
+function failU(){var cs=[];if((S.ronin||0)<2){cs.push(["浪人して再挑戦する(予備校の寮に入る・寮費は年96万円)",function(){ronPick(1)}],["浪人して再挑戦する(自宅から予備校に通う)",function(){ronPick(0)}])}cs.push(["別の大学を選び直す",univ],["大学に進まず就職する(高卒)",function(){S.edu=1;S.job=1;S.inc=sal(240);S.stu=0;S.h.push("高校卒業後、就職");S.tag="社会人";workMenu()}]);scr("不合格","どうする？(浪人は最大2回まで)",cs)}
+function scrScholar(){scr("奨学金","大学の学費を、どう賄う？",[["日本学生支援機構の奨学金を借りる(資金+120万円、卒業後に返済)",function(){S.f+=120;ap({m:-2});run(UN,0,uy)}],["借りずに家計と貯金で払う",function(){run(UN,0,uy)}]])}
+function stall(){if(S.f<=-300){fin("破綻","借金に追われて","学費と生活費の借金が膨らみ、受験を続けることも、働き直すことも難しくなった。誰かに相談することから、もう一度始めてみたい。");return true}if(S.a>=40&&!S.yp){fin("停滞","受験生のまま年を重ねた","気がつけば、同期はとっくに社会で働いている。試験の結果は出ないまま、年齢だけが重なった。これまでの努力を振り返り、別の道を考えることも、立派な選択だ。");return true}return false}
+var UPS=[["代々木ゼミナール(通年本科)","大手の集団授業。大学受験の定番",90,1.25],["東進ハイスクール(通年)","映像授業中心。実力を積み上げる",70,1.15],["武田塾(個別指導)","自習管理とアドバイス型の指導",80,1.2],["予備校なし(独学)","費用ゼロ。自分で計画を立てる",0,1]];
+function pickPrep(cb,list){list=list||PS;var isU=list===UPS;var opts=list.filter(function(p){return p[0]==S.ps[0]||p[2]==0||S.f>=p[2]});scr(isU?"大学受験用の予備校を選ぶ":"予備校を選ぶ",isU?"大学受験用の予備校。費用は一括払いで、借入はできません。資金が足りない予備校は表示されません。":"受講料は購入時に一括でかかります(同じ予備校を続けるなら不要)。効果は人との相性で変わり、同じ予備校でも伸びる人と伸びない人がいます。",opts.map(function(p){return [lab(p[0]+(S.ps[0]==p[0]?"【利用中】":""),p[1]+(S.ps[0]==p[0]?"":" / 費用 "+p[2]+"万円")),function(){if(S.ps[0]!=p[0]){S.f-=p[2];S.ps=p;S.pfit=p[3]>1?rn(0,.2):0;S.bonus=(p[3]-1)*20;S.h.push("予備校:"+p[0]+"("+p[2]+"万円)")}cb()}]}))}
+function uniPrep(){univ()}
+function ronYear(){year("大学受験の浪人",function(){ap({dev:1});univ()})}
+function failU(){var cs=[];if((S.ronin||0)<2){if(S.f>=96)cs.push(["浪人して再挑戦する(予備校の寮に入る・寮費は年96万円)",function(){ronPick(1)}]);cs.push(["浪人して再挑戦する(自宅から予備校に通う)",function(){ronPick(0)}])}cs.push(["別の大学を選び直す",univ],["大学に進まず就職する(高卒)",function(){S.edu=1;S.job=1;S.inc=sal(240);S.stu=0;S.h.push("高校卒業後、就職");S.tag="社会人";workMenu()}]);scr("不合格","どうする？(浪人は最大2回まで。借入はできません)",cs)}
+var S,app=document.getElementById("app");
+function cl(v,a,b){return Math.max(a,Math.min(b,v))}
+function P(p){return Math.random()<p}
+function pc(p){return Math.round(p*100)+"%"}
+function lim(p){return cl(p,.02,.95)}
+function adm(x,req){return lim(1/(1+Math.exp(-(x-req)/2.5)))}
+function rn(m,s){var u=Math.random()||1e-9;return m+s*Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*Math.random())}
+function Tw(){return cl(36+S.law*.35+(S.dev-50)*.35+S.bonus,20,90)}
+function el(h){app.innerHTML=h;window.scrollTo(0,0)}
+function ap(e){for(var k in e){if(k=="f")S.f+=e[k];else if(k=="dev")S.dev=cl(S.dev+e[k],25,80);else if(k=="it"){S.items=S.items||[];if(S.items.indexOf(e[k])<0)S.items.push(e[k])}else if(k=="lose"){var lt=e[k];S.items=(S.items||[]).filter(function(x){return x!=lt})}else S[k]=cl(S[k]+e[k],0,100)}}
+function df(e){var a=[];for(var k in e){if(k=="it"||k=="lose")continue;var v=Math.round(e[k]*10)/10;a.push(NM[k]+(v>0?"+":"")+v+(k=="f"?"万円":""))}return a.join("　")}
+function st(n,v,b){return '<div class="st">'+n+'<b>'+v+'</b>'+(b==null?'':'<div class="bar"><i class="'+(b<25?'low':'')+'" style="width:'+b+'%"></i></div>')+'</div>'}
+function stH(){var f=Math.round(S.f);return '<div class="stats">'+st("学力偏差値",S.a>=7?S.dev.toFixed(1):"—")+st("法律偏差値",S.a>=18?Tw().toFixed(1):"—")+st("予備校",S.ps[0].split("(")[0])+st("体力",Math.round(S.b)+"/100",S.b)+st("精神",Math.round(S.m)+"/100",S.m)+st("資金",(f<0?"-":"")+Math.abs(f)+"万円"+(f<0?"(借入)":""))+'</div>'}
+function pr(){return '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="flex:none;width:56px;height:56px">'+PT()+'</div><div class="prog" style="margin:0">'+S.a+'歳'+(S.tag?'　'+S.tag:'')+'</div></div>'}
+function bind(cs){var bs=app.querySelectorAll("button[data-i]");for(var i=0;i<bs.length;i++)bs[i].onclick=function(){cs[+this.getAttribute("data-i")][1]()}}
+function scr(h,p,cs){var x=pr()+stH()+'<div class="card">'+PX(h+p)+'<h2>'+h+'</h2><p>'+p+'</p></div>';for(var i=0;i<cs.length;i++)x+='<button class="btn" data-i="'+i+'">'+cs[i][0]+'</button>';el(x);bind(cs)}
+function msg(h,body,cb,btn){el(pr()+stH()+'<div class="card">'+PX(h+body)+'<h2>'+h+'</h2><div class="res">'+body+'</div></div><button class="btn main" id="nx">'+(btn||"次へ")+'</button>');document.getElementById("nx").onclick=function(){chk(cb)}}
+function chk(cb){if(S.f<=-500)return fin("撤退","借入が限界に達した","学費と生活費の借入が膨らみ、これ以上は続けられなくなった。ここで立ち止まる。身につけた力は、別の場所でも生きるはずだ。");if(S.m<=0)return fin("撤退","心が限界を迎えた","張りつめた糸が切れた。これは敗北ではない。休んで、これからを考える。");cb()}
+function lab(n,s){return n+'<small>'+s+'</small>'}
+var TW=[["体調を崩して数日寝込んだ",{b:-6}],["思わぬ出会いに励まされた",{m:6}],["良い先生に出会った",{dev:1.5}],["急な出費があった",{f:-8}],["友人に誘われて旅行に行った",{m:8,f:-10}],["親からの仕送りが増えた",{f:20}],["家賃の更新料がかかった",{f:-15}],["スマホが壊れて買い替えた",{f:-8}],["懸賞やフリマで思わぬ収入があった",{f:5}],["恋人と別れて落ち込んだ",{m:-8}],["受験仲間のSNSの言葉に励まされた",{m:5}],["好きな映画を観て気持ちがほぐれた",{m:4}],["大きな奨学金の給付が決まった",{f:40,m:3}],["税金の還付があった",{f:6}],["家族の看病で勉強時間が減った",{m:-6,f:-5}],["生活費が予想より膨らんだ",{f:-12,m:-3}],["図書館で探していた参考書が見つかった",{dev:1}],["古本屋で基本書を格安で買えた",{f:-2,dev:1}],["親戚から入学祝いをもらった",{f:10,m:3}],["家電が急に壊れ、修理代がかかった",{f:-12}],["友人の結婚式に呼ばれて出費した",{f:-10,m:4}],["夜更かしが続き、風邪をひいた",{b:-7}],["久しぶりに家族と食卓を囲んだ",{m:5}],["ネットの誤情報に振り回された",{m:-4,dev:-.5}],["地元のお祭りで気分転換した",{m:5,b:2}],["電車で居眠りをして乗り過ごした",{b:-2,m:-2}],["先輩から使い古しのノートをもらった",{dev:1.5}],["大切にしていたノートPCが故障した",{f:-20}],["投資信託の値動きが気になり眠れなかった",{m:-5,f:3}],["副業の謝礼が入った",{f:8}],["隣の部屋の騒音に悩まされた",{m:-5}],["ゼミの先生から推薦状をもらった",{dev:1,m:4}],["学内の模擬裁判で良い評価を得た",{dev:1.5,m:4}],["歯の治療で通院が続いた",{b:-4,f:-6}],["健康診断で数値が引っかかった",{b:-3,m:-2}],["地域の無料法律相談を手伝った",{dev:1,m:3}],["宝くじで少額が当たった",{f:3,m:2}],["急な引っ越しを迫られた",{f:-25,m:-4}],["近所の猫と仲良くなり、心が和んだ",{m:4}],["寝不足で電車を乗り間違えた",{b:-2,m:-2}],["受験仲間と勉強会を開いた",{dev:1.5,m:3}],["親の体調不良で帰省した",{m:-4,f:-8}],["腰痛に悩まされた",{b:-6}],["散歩の習慣ができて体が軽くなった",{b:6,m:3}],["友人の起業を手伝い、報酬を得た",{f:15,m:2}],["大雨で床上浸水の被害を受けた",{f:-30,m:-6}],["参考書を買い込み、机の上が賑やかになった",{it:"book",f:-4}],["電車で鞄を置き忘れた",{lose:"bag",f:-3}],["新しい鞄を買い直した",{it:"bag",f:-5}],["大切なノートをなくして、しばらく落ち込んだ",{lose:"book",m:-6}],["夜の街で飲みすぎ、無気力な日々が続いた",{m:-10,b:-6}],["気持ちを切り替えて、身だしなみを整えた",{m:5}],["同期が司法修習を終え、事務所で働き始めたと聞いた",{m:-6}],["受験仲間が勉強をやめ、会社員になると連絡があった",{m:-5}],["友人が結婚し、子どもの写真が届いた",{m:-5}],["予備試験の受験票を見て、手が止まった",{m:-7}],["アルバイト先で近況を聞かれ、言葉に詰まった",{m:-4}],["模試の判定が下がり、学習の方向を見失った",{dev:-2,m:-4}],["体調不良で勉強が一週間止まった",{dev:-1.5,b:-4}],["予備校の授業と自分の理解がずれ、成績が伸び悩んだ",{dev:-1.5,m:-3}],["覚えたはずの論点を、本番形式で思い出せなかった",{dev:-1,law:-3}]];
+function rv(){if(P(.3)){var w=TW[Math.floor(Math.random()*TW.length)];ap(w[1]);return '<p>【偶然】'+w[0]+'。<span class="sub">'+df(w[1])+'</span></p>'}return ''}
+function run(L,i,done){if(i>=L.length)return done();var v=L[i];if(v.a)S.a=v.a;else S.a++;scr(v.t,v.d,v.c.map(function(c){return [c.l,function(){ap(c.e);if(!v.a&&S.lf)ap({law:5});var x='<p>'+c.r+'</p><p class="sub">'+df(c.e)+(!v.a&&S.lf?"　法律力+5":"")+'</p>';if(P(.3)){var w=TW[Math.floor(Math.random()*TW.length)];ap(w[1]);x+='<p>【偶然】'+w[0]+'。<span class="sub">'+df(w[1])+'</span></p>'}msg(v.t,x,function(){run(L,i+1,done)})}]}))}
+var CH=[
+{a:7,t:"小学校",d:"ごく普通の小学生になった。放課後はどう過ごす？",c:[{l:"学習塾に通う",e:{dev:3,m:-2,f:-20},r:"勉強の習慣が身についた。"},{l:"外で遊ぶ",e:{b:7,m:5,dev:.5},r:"毎日泥だらけで帰った。"},{l:"図書室に通う",e:{dev:2,m:3},r:"文章を読む力がついた。"}]},
+{a:10,t:"中学受験",d:"地元の公立中学に進むか、私立中学を受験するか。",c:[{l:"私立中学を受験する",e:{dev:3,m:-4,f:-80},r:"塾通いの日々で、学力は伸びた。"},{l:"公立中学に進む",e:{m:3,b:2},r:"地元の友人と、のびのびと過ごした。"}]},{a:13,t:"中学校",d:"高校受験が近づいてくる。",c:[{l:"部活に打ち込む",e:{b:7,m:3,dev:.5},r:"仲間とやり抜く力を得た。"},{l:"塾と自習で受験勉強をする",e:{dev:4,m:-3,f:-30},r:"模試の偏差値が上がってきた。"},{l:"授業と宿題を丁寧にこなす",e:{dev:2,m:1},r:"無理のないペースで続けた。"}]}];
+var HSE=[
+{a:16,t:"高校の日々",d:"授業と生活のバランスをどう取る？",c:[{l:"授業と予習復習を重視する",e:{dev:3,m:-2},r:"成績が少しずつ上がった。"},{l:"部活や友人との時間を大切にする",e:{m:6,b:5,dev:.3},r:"充実した毎日だった。"},{l:"アルバイトで稼ぐ",e:{f:30,dev:-.5,b:-2},r:"自由に使えるお金ができた。"}]},
+{a:17,t:"受験期",d:"大学受験(または就職)に向けた最後の一年。",c:[{l:"予備校や塾に通って追い込む",e:{dev:4,m:-4,f:-40},r:"模試の判定が上向いた。"},{l:"自習室で黙々と勉強する",e:{dev:3,m:-2,b:-2},r:"毎日同じ席で、淡々と積み重ねた。"},{l:"無理せず今のペースを保つ",e:{dev:1,m:3},r:"心の余裕は保てた。"}]}];
+var UN=[
+{t:"大学1年",d:"入学後の過ごし方を決める。",c:[{l:"サークルや友人関係を広げる",e:{m:6,dev:.3,f:-5},r:"人の輪が広がった。"},{l:"アルバイトに力を入れる",e:{f:50,dev:-.3,b:-3},r:"生活は楽になったが、勉強時間は減った。"},{l:"授業に集中する",e:{dev:1.5,m:-2},r:"成績は上がったが、友人は少なめだ。"}]},
+{t:"大学2年",d:"ゼミや課外活動を選ぶ。",c:[{l:"ゼミで議論を重ねる",e:{dev:1.5,m:2,b:-2},r:"論点を戦わせる面白さを知った。"},{l:"留学や課外活動に挑戦する",e:{m:7,f:-30},r:"視野が広がった。"},{l:"試験勉強に専念する",e:{dev:1,b:-3},r:"単位は順調だった。"}]},{t:"大学3年",d:"インターンや留学、就職活動など、将来の道を探す時期。",c:[{l:"法曹を目指す準備を続ける",e:{dev:1,b:-2},r:"ロースクールや予備試験の情報を集めた。"},{l:"インターンで就職先を探す",e:{f:20,m:-2},r:"社会の仕組みに触れ、視野が広がった。"},{l:"短期留学に行く",e:{f:-40,m:6},r:"語学と異文化の経験を得た。"}]}];
+var PS=[
+["伊藤塾(本科生)","司法試験・予備試験の最大手。講座・答練がそろう。約147万円(ゼミ込みで最大約172万円)",147,1.3],
+["アガルート(予備試験最短合格・フル)","オンライン完結の担任制カリキュラム。約129.8万円",129.8,1.25],
+["アガルート(予備試験最短合格・ライト)","フルより絞ったオンライン講座。約99.9万円",99.9,1.2],
+["資格スクエア(予備試験講座)","科目担任制のオンライン講座。約87.8万円",87.8,1.15],
+["スタディング","低価格のスマホ完結型。約9〜15万円の幅(約12万円で計算)",12,1.1],
+["辰已法律研究所(答練中心)","答練・模試で実戦力を磨く。答練は約2〜24万円の幅(約10万円で計算)",10,1.1],
+["LEC(S式入門講座・基礎編〜)","低価格の入門講座。約9万円〜",9,1.08],
+["予備校なし(独学)","費用ゼロ。情報は自分で集める",0,1]];
+var IN=[["全力で詰め込む",6,{b:-8,m:-6,dev:1},0],["標準的なペースで進める",3,{b:-3,m:-2,dev:.4},0],["アルバイトと両立する",1,{b:-4,m:-2},60],["意識して休む",0,{b:6,m:5},0]];
+function pickPrep(cb){scr("予備校を選ぶ","受講料は購入時に一括でかかります(同じ予備校を続けるなら不要)。価格は2026年時点の公式・比較サイト掲載額の目安で、効果は人との相性で変わり、同じ予備校でも伸びる人と伸びない人がいます。",PS.map(function(p){return [lab(p[0]+(S.ps[0]==p[0]?"【利用中】":""),p[1]+(S.ps[0]==p[0]?"":" / 費用 "+p[2]+"万円")),function(){if(S.ps[0]!=p[0]){S.f-=p[2];S.ps=p;S.pfit=p[3]>1?rn(0,.2):0;S.bonus=(p[3]-1)*20;S.h.push("予備校:"+p[0]+"("+p[2]+"万円)")}cb()}]}))}
+function year(label,cb){scr(label,"この一年、どのペースで過ごす？(利用中:"+S.ps[0]+" / "+(S.job?"仕事あり":S.stu?"学生":"受験生")+")",IN.map(function(n){return [n[0],function(){S.a++;var mu=S.ps[3]*(1+(S.pfit||0)),g=Math.round((2+n[1]*.4)*mu*(S.job?.7:1)*Math.exp(rn(0,.3))*(0.5+S.dev/120)),e={law:Math.round(g-1+rn(0,.8)),dev:Math.round(((mu-1)*.6+(n[1]-3)*.1+1.2+rn(0,.3))*10)/10};for(var q in n[2])e[q]=n[2][q];e.f=(S.job?S.inc-100:S.stu?S.aid-80-S.tu:-60)+(S.job?0:n[3]);ap(e);var ab=(!S.stu&&!S.job&&S.f<0);if(ab){S.f=0;ap({b:-5,m:-3})}var ev=rv();msg(label,'<p>一年が過ぎた。'+(ab?"生活費が足りず、アルバイトで補った。":"")+(S.job?"仕事と両立した分、学習は7割ほどに。":"")+'</p><p class="sub">'+df(e)+'(生活費・学費・収入込み)</p>'+ev,cb)}]}))}
+function fin(stamp,t,b){var txt="司法試験 受験生の人生\n結果:"+stamp+"("+S.a+"歳)\n"+S.h.join(" → ");el(pr()+'<div class="stamp">'+stamp+'</div><div class="card">'+PX(stamp+t+b)+'<h2>'+t+'</h2><p>'+b+'</p></div>'+stH()+'<ul class="log"><li>'+S.h.join('</li><li>')+'</li></ul><button class="btn main" id="cp">結果をコピー</button><button class="btn" id="re">生まれ直す</button><p class="sub" id="msg"></p>');document.getElementById("re").onclick=birth;document.getElementById("cp").onclick=function(){var m=document.getElementById("msg");try{navigator.clipboard.writeText(txt).then(function(){m.textContent="コピーしました。"},function(){m.textContent="コピーできませんでした。"})}catch(e){m.textContent="コピーできませんでした。"}}}
+function finJob(){S.h.push("別の道を歩む");fin("別の道","法律の知識を、別の場所で","仕事や暮らしの中で、自分の道を歩いていく。法律を学んだ経験は、思わぬところで役に立つ。")}
+function title(){el('<h1><small>生まれてから、法曹になるまで</small>司法試験<br>受験生の人生</h1><p>ごく普通の家庭に生まれ、中学卒業・高校・大学・就職・予備試験・ロースクールと、現実に近い分かれ道を進みます。結果は偏差値と確率で決まります。</p><p class="sub">ロースクール別の合格率は法務省公表の令和7年(2025年)司法試験データ、予備試験合格者の司法試験合格率は約9割、予備試験の最終合格率は「例年3〜4%程度」、受験回数は5年5回を基にしています。大学の偏差値は河合塾などの公開値をもとにした概算です。予備校の料金は2026年時点の公式・比較サイト掲載額の目安で、効果の差はゲーム内の設定です。実際の合否や費用を保証するものではありません。</p><button class="btn main" id="go">産まれる</button>');document.getElementById("go").onclick=birth}
+function pct(d){return 1/(1+Math.exp(-1.702*(d-50)/10))}
+function sal(b){return Math.round(b*Math.exp(rn(0,.3)))}
+function birth(){var w=Math.exp(rn(0,.6)),f=[w>1.6?"余裕のある家庭":w>.75?"ごく普通の家庭":"やりくりの厳しい家庭",Math.round(100*w),Math.round(110*w)];var dv=cl(rn(50,10),20,80);S={a:0,dev:dv,law:0,m:cl(rn(50,12),10,90),b:cl(rn(60,15),20,100),f:f[1],aid:f[2],h:[f[0]+"に生まれる"],lf:0,edu:0,job:0,inc:0,stu:0,tu:0,t:0,yn:0,yp:0,yb2:0,sr:.4,tc:53,sh:1,ps:PS[7],bonus:0,tag:"",items:["bag"],look:{h:HC[Math.floor(Math.random()*HC.length)],s:SKC[Math.floor(Math.random()*SKC.length)],c:CC[Math.floor(Math.random()*CC.length)]}};scr("誕生","あなたは"+f[0]+"に生まれた。生まれつきの学力偏差値は"+dv.toFixed(1)+"(同年代の上位約"+Math.round(100*(1-pct(dv)))+"%に相当)。",[["成長していく",function(){run(CH,0,hs)}]])}
+var H=[["都道府県トップ級の進学校",67,3],["上位の進学校",60,2],["中堅の高校",52,0],["下位の高校",44,-1],["定時制・通信制高校",30,-2]];
+function hs(){S.a=15;S.edu=0;scr("高校受験","15歳。進路を決める。あなたの学力偏差値は "+S.dev.toFixed(1)+"。",H.map(function(h){var p=h[1]<=30?.97:adm(S.dev,h[1]);return [lab(h[0],"合格目安 偏差値"+h[1]+(h[1]>30?"(受験者層 "+(h[1]-3)+"〜"+(h[1]+3)+")":"(ほぼ全員合格)")+" / あなたの合格率 "+pc(p)),function(){S.a=16;if(P(p)){S.edu=1;ap({dev:h[2]});S.h.push(h[0]+"に進学");msg("合格","<p>"+h[0]+"に合格した。(合格率 "+pc(p)+")</p>",function(){run(HSE,0,trk)})}else{msg("不合格","<p>"+h[0]+"は不合格だった。(合格率 "+pc(p)+")</p>",function(){S.a=15;S.h.push("高校受験で不合格");hs()})}}]}).concat([["高校には進学せず、働く(中卒)",function(){S.edu=0;S.job=1;S.inc=sal(170);S.h.push("中学卒業後、就職");S.tag="社会人";workMenu()}]]))}
+var U=[["東京大学法学部",67.5,54],["京都大学法学部",65,54],["一橋大学法学部",65,54],["慶應義塾大学法学部",65,110],["早稲田大学法学部",65,110],["中央大学法学部",60,110],["明治大学法学部",60,110],["同志社大学法学部",57.5,110],["立命館大学法学部",55,110],["日本大学法学部",50,110],["その他の大学の法学部",45,100],["Fランと呼ばれる私立大学(法学部)",38,110],["Fランと呼ばれる私立大学(文系学部)",35,110],["Fランと呼ばれる私立大学(経済学部)",34,110],["小規模な地方私立大学(法学部)",32,100],["法学部以外の学部(偏差値50前後)",50,100,1]];
+function univ(){S.tag="大学受験";scr("大学受験","あなたの学力偏差値は "+S.dev.toFixed(1)+"。受験科目は「"+(S.track||"未選択")+"」。国立は数学・理科を含む総合力、私立は指定科目の得点力が問われる。科目の相性で合格率が変わる。どうする？(学費は年間の目安:国立約54万円、私立約110万円)",U.map(function(u){var p=adm(S.dev+tb(u[0]),u[1]);return [lab(u[0],"合格目安 偏差値"+u[1]+"(受験者層 "+(u[1]-3)+"〜"+(u[1]+3)+") / あなたの合格率 "+pc(p)),function(){S.a++;if(P(p)){S.lf=u[3]?0:1;S.tu=u[2];S.stu=1;S.h.push(u[0]+"に進学");S.tag="大学生";msg("合格","<p>"+u[0]+"に合格した。(合格率 "+pc(p)+")</p>",function(){scrScholar()})}else{S.h.push(u[0]+"に不合格");msg("不合格","<p>"+u[0]+"は不合格だった。(合格率 "+pc(p)+")</p>",function(){failU()},"次へ")}}]}).concat([["大学には進学せず、就職する(高卒)",function(){S.edu=1;S.job=1;S.inc=sal(240);S.stu=0;S.h.push("高校卒業後、就職");S.tag="社会人";workMenu()}]]))}
+function workMenu(){var cs=[["働きながら予備試験に挑戦する",function(){S.h.push("働きながら予備試験へ");S.route="予備";yobi()}]];if(S.edu==2)cs.push(["退職してロースクール(未修)を受験する",function(){S.job=0;S.stu=0;lawPick(0)}]);else cs.push(["退職して大学受験に挑戦する",function(){S.job=0;S.stu=0;univ()}]);cs.push(["このまま働いて生きていく",finJob]);scr("社会人","学歴に関わらず受けられる予備試験もある。働きながら法曹を目指す？",cs)}
+function uy(){pickPrep(function(){year("学部時代の学習",route)})}
+function route(){S.edu=2;var cs=[["予備試験に挑戦する(大学在学中から)",function(){S.h.push("予備試験ルートを選ぶ");S.tag="予備試験";S.route="予備";yobi()}]];if(S.lf)cs.push(["ロースクール既修者コースを受験する",function(){lawPick(1)}]);cs.push(["ロースクール未修者コースを受験する",function(){lawPick(0)}],["就職する(大卒)",function(){scr("就職活動","どの業界を目指す？",[["大手企業の総合職",function(){S.job=1;S.inc=sal(420);S.stu=0;S.tu=0;S.h.push("大手企業に就職");S.tag="社会人";workMenu()}],["公務員(国家・地方)",function(){S.job=1;S.inc=sal(300);S.stu=0;S.tu=0;S.h.push("公務員になる");S.tag="社会人";workMenu()}],["中小企業・その他",function(){S.job=1;S.inc=sal(280);S.stu=0;S.tu=0;S.h.push("中小企業に就職");S.tag="社会人";workMenu()}]])}]);scr("進路選択","大学3年の秋。"+(S.lf?"":"(法学部以外なので、既修者コースは選べない)"),cs)}
+function yobi(){scr("直前講座","予備試験の直前期。追加の講座を申し込む？",[["直前講座を申し込む(費用25万円、学力+3)",function(){S.f-=25;ap({law:3,m:-2});year("予備試験の勉強",yobiEx)}],["申し込まない",function(){year("予備試験の勉強",yobiEx)}]])}
+function yobiEx(){if(S.stu&&S.a>=22){S.stu=0;S.tu=0}var T=Tw(),tot=Math.min(.15,.008*Math.exp((T-62)/4)),p1=lim(.15*Math.exp((T-60)/10)),p3=.95,p2=Math.min(.95,tot/(p1*p3)),r,t="<p>あなたの法律偏差値は "+T.toFixed(1)+"。予備試験の最終合格者層は偏差値68前後。最終合格率は約"+pc(tot)+"(短答"+pc(p1)+"→論文"+pc(p2)+"→口述95%)。</p>";if(!P(p1))r="短答式で不合格。";else if(!P(p2))r="短答式は通過したが、論文式で不合格。";else if(!P(p3))r="論文式は通過したが、口述で不合格。";else{S.yp=1;S.h.push("予備試験に最終合格");S.tag="予備合格";return msg("予備試験",t+"<p>最終合格。難関の予備試験を突破した。</p>",function(){S.t=0;shi()},"司法試験へ")}S.yn++;S.h.push("予備試験に不合格");msg("予備試験",t+"<p>"+r+"</p>",function(){if(stall())return;var cs=[["予備校を選び直して、もう一年挑戦する",function(){pickPrep(yobi)}]];if(S.edu==2){if(S.lf)cs.push(["ロースクール既修者コースへ",function(){lawPick(1)}]);cs.push(["ロースクール未修者コースへ",function(){lawPick(0)}])}cs.push(["やめて、別の道へ",finJob]);scr("予備試験の結果","どうする？",cs)})}
+var L=[["京都大学",.5845,2,80],["東京大学",.5,2,80],["慶應義塾大学",.5,2,170],["一橋大学",.4766,2,80],["早稲田大学",.4615,2,150],["東北大学",.4336,1,80],["神戸大学",.4118,1,80],["中央大学",.4053,1,130],["同志社大学",.3333,1,133],["大阪大学",.2857,1,80],["明治大学",.1892,0,130],["立命館大学",.1571,0,130]];
+var RQ=[[55,59],[60,64],[66,70]],TC=[48,53,58];
+function lawPick(sh){S.tag="ロー受験";scr("ロースクールを選ぶ",(sh?"既修者":"未修者")+"コース。既修は法律偏差値(あなた:"+Tw().toFixed(1)+")、未修は学力偏差値(あなた:"+S.dev.toFixed(1)+")で入試を受ける。学費は年間の目安。",L.map(function(l){var rq=RQ[l[2]][sh?0:1],p=adm(sh?Tw():S.dev,rq);return [lab(l[0]+"大学法科大学院","司法試験合格率(2025年) "+(l[1]*100).toFixed(1)+"% / 入試の合格目安 "+(sh?"法律":"学力")+"偏差値"+rq+" / あなたの合格率 "+pc(p)+" / 学費 約"+l[3]+"万円"),function(){year("ロースクール入試の準備",function(){if(P(p)){S.sr=l[1];S.tc=TC[l[2]];S.sh=sh;S.l=l[0];S.tu=l[3];S.stu=1;S.f-=28;S.h.push(l[0]+"法科大学院("+(sh?"既修":"未修")+")に入学");S.tag=l[0]+(sh?"・既修":"・未修");msg("合格","<p>"+l[0]+"に合格した。(合格率 "+pc(p)+" / 入学金 約28万円)</p>",function(){var go=function(){scr("予備試験の併願","在学中も、予備試験を受ける？",[["併願する(負担は増えるが、予備試験に受かれば司法試験の合格率は約9割)",function(){S.yb2=1;ap({b:-4,m:-3});lawY(sh?2:3)}],["ローの勉強に専念する",function(){lawY(sh?2:3)}]])};scr("学費の負担","学費は年間約"+l[3]+"万円。どう払う？",[["奨学金を借りる(資金+200万円、精神-3)",function(){ap({m:-3});S.f+=200;go()}],["貯金と家族の援助で払う",go]])},"入学する")}else{S.h.push(l[0]+"の入試に不合格");msg("不合格","<p>"+l[0]+"は不合格だった。(合格率 "+pc(p)+")</p>",function(){scr("どうする？","",[["ロー浪人して、もう一年挑戦する",function(){S.h.push("ロー浪人");pickPrep(function(){lawPick(sh)})}],["別の道へ",finJob]])})}})}]}))}
+function yb2(cb){if(!S.yb2||S.yp)return cb();var p=lim(.02*Math.exp((Tw()-60)/5));if(P(p)){S.yp=1;S.h.push("在学中に予備試験に合格");return msg("予備試験","<p>通学の合間に受けた予備試験に、最終合格した。(合格率 "+pc(p)+")</p>",cb)}cb()}
+function lawY(n){year("ロースクール("+S.l+")",function(){yb2(function(){if(n>1)lawY(n-1);else{S.h.push("ロースクール最終学年");S.t=1;exm(1)}})})}
+function shi(){S.t++;if(S.t>5)return fin("資格失効","受験資格を使い切った","5年5回の受験機会を使い切った。積み重ねた力は、別の場所できっと役に立つ。");S.tag="司法試験("+S.t+"回目)";var go=function(){year("司法試験に向けて",function(){exm(0)})};scr("住まい","受験期の住まいは？",[["実家から通う(家賃なし、精神+2)",function(){ap({m:2});go()}],["一人暮らしをする(家賃60万円、精神+4)",function(){S.f-=60;ap({m:4});go()}]])}
+function exm(z){var T=Tw(),p;if(S.yp)p=.9;else if(z)p=S.sr*.5*(S.sh?1.1:.4)*Math.exp((T-S.tc)/10);else p=S.sr*.2*(S.sh?1.1:.6)*Math.exp((T-S.tc)/10)*(1-.1*(S.t-2));p=lim(p);var t="<p>"+S.t+"回目("+(S.yp?"予備試験合格者として":z?"在学中受験":"修了後の受験")+")。あなたの法律偏差値は "+T.toFixed(1)+(S.yp?"":"、"+S.l+"の受験者の平均は約"+S.tc)+"。合格率は約"+pc(p)+"。</p>";if(P(p)){S.h.push("司法試験に合格("+S.t+"回目)");return msg("司法試験",t+"<p>発表の画面に、自分の番号を見つけた。</p>",function(){fin("合格","あなたの番号が、そこにあった","生まれてから今日までの積み重ねが、ここで実を結んだ。司法修習が始まる。")},"結果を見る")}S.h.push("司法試験に不合格("+S.t+"回目)");msg("司法試験",t+"<p>今年は届かなかった。</p>",function(){if(S.t>=5)return fin("資格失効","受験資格を使い切った","5年5回の受験機会を使い切った。積み重ねた力は、別の場所できっと役に立つ。");if(stall())return;S.stu=0;S.tu=0;scr("不合格","受験できる回数は、あと"+(5-S.t)+"回。",[["予備校を選び直して、もう一年挑戦する",function(){pickPrep(shi)}],["ここで区切りをつける",finJob]])})}
+title();
+</script>
+</body>
+</html>
